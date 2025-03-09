@@ -7,7 +7,7 @@ export function Header({ children }: { children?: React.ReactNode }) {
 	const { isMobile } = useSidebar();
 
 	return (
-		<header className="fle sticky top-0 z-50 w-full items-center border-b bg-background">
+		<header className="fle sticky top-0 z-50 w-full items-center border-b-[6px] bg-background border-primary">
 			<div className="flex h-[--header-height] items-center space-x-2 pr-5">
 				<div className="flex-grow">
 					<nav className="flex items-center space-x-2 font-medium text-base text-foreground/60 md:justify-start">

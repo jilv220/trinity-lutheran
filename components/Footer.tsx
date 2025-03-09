@@ -125,7 +125,7 @@ export default function Footer() {
 							Connect With Us
 						</h3>
 						<a
-							href="https://www.facebook.com/TrinityLutheranChurchRichmondBC"
+							href="https://www.facebook.com/TrinityLutheranRichmondBC"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="flex items-center gap-2 hover:text-primary transition group"

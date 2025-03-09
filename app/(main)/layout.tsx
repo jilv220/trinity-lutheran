@@ -1,6 +1,7 @@
+import AppSidebar from "@/components/AppSidebar";
 import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
-import AppSidebar from "@/components/Navbar";
+import InfoPanel from "@/components/InfoPanel";
 import {
 	SidebarInset,
 	SidebarProvider,
@@ -21,8 +22,12 @@ export default function MainLayout({
 				<div className="flex flex-1">
 					<AppSidebar />
 					<SidebarInset>
-						<div className="relative flex flex-col min-h-screen">
-							{children}
+						<div className="relative flex flex-col lg:flex-row min-h-screen w-full max-w-7xl mx-auto gap-4">
+							{/* Main content */}
+							<div className="flex-1">{children}</div>
+
+							{/* Info Panel (sidebar on desktop, below content on mobile) */}
+							<InfoPanel className="order-2 lg:order-1" />
 						</div>
 						<Footer />
 					</SidebarInset>
