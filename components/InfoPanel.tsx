@@ -153,7 +153,7 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ className }) => {
 						<p>Everyone Welcome!</p>
 						<Link
 							href="/bible-studies"
-							className="text-[#4384b0] fold-bold hover:underline flex items-center"
+							className="text-[#4384b0] font-bold hover:text-primary hover:underline flex items-center"
 							aria-label="More information about Bible classes"
 						>
 							<span>more info</span>

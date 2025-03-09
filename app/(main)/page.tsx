@@ -1,3 +1,4 @@
+import { ProseBody } from "@/components/ProseBody";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
@@ -35,13 +36,13 @@ export default async function Home() {
 				<div className="w-[85%] my-8 space-y-8">
 					{posts.map((post) => (
 						<Card key={nanoid()} className="overflow-hidden">
-							<CardHeader>
+							<CardHeader className="pb-3">
 								<CardTitle className="text-2xl text-[#4384b0]">
 									{post.title}
 								</CardTitle>
 							</CardHeader>
-							<CardContent>
-								{Array.isArray(post.body) && <PortableText value={post.body} />}
+							<CardContent className="[&>p]:my-3">
+								{Array.isArray(post.body) && ProseBody(post.body)}
 							</CardContent>
 						</Card>
 					))}
