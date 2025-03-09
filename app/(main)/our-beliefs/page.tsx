@@ -3,7 +3,6 @@ import { type Article, getArticle } from "@/lib/strapi-api";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
-export const DOCUMENT_ID = "r0b54ztwn6bs390on633y5jy";
 
 export const metadata: Metadata = {
 	title: "Our Beliefs | Trinity Lutheran Church - Richmond, B.C.",
@@ -14,6 +13,7 @@ export const metadata: Metadata = {
 export default async function OurBeliefs() {
 	let article: Article | undefined;
 	try {
+		const DOCUMENT_ID = "r0b54ztwn6bs390on633y5jy";
 		article = await getArticle({ documentId: DOCUMENT_ID });
 	} catch (error) {
 		console.error("Failed to fetch article", error);
