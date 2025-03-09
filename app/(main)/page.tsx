@@ -1,17 +1,18 @@
-import BlockRendererClient from "@/components/BlockRendererClient";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { type Articles, getArticles, getStrapiUrl } from "@/lib/strapi-api";
+import { client } from "@/lib/sanity";
+import { nanoid } from "nanoid";
+import { PortableText, SanityDocument } from "next-sanity";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-	let articles: Articles = [];
-	try {
-		articles = await getArticles(true);
-	} catch (error) {
-		console.error("Failed to fetch homepage articles:", error);
-	}
+const POSTS_QUERY = `*[
+  _type == "post" && isHomePage == true
+]|order(publishedAt desc)[0...12]{_id, title, body, publishedAt}`;
+const options = { next: { revalidate: 30 } };
+
+export default async function Home() {	
+	const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
 
 	return (
 		<div className="flex flex-col items-center justify-center">
@@ -26,28 +27,17 @@ export default async function Home() {
 			</div>
 
 			{/* Dynamic content from CMS */}
-			{articles.length > 0 ? (
+			{posts.length > 0 ? (
 				<div className="w-[85%] my-8 space-y-8">
-					{articles.map((article) => (
-						<Card key={article.id} className="overflow-hidden">
+					{posts.map((post) => (
+						<Card key={nanoid()} className="overflow-hidden">
 							<CardHeader>
 								<CardTitle className="text-2xl text-[#4384b0]">
-									{article.title}
+									{post.title}
 								</CardTitle>
 							</CardHeader>
 							<CardContent>
-								<BlockRendererClient content={article.content} />
-								{article.image?.data && (
-									<div className="mt-4">
-										<Image
-											src={`${getStrapiUrl()}${article.image.data.attributes.url}`}
-											alt={article.title}
-											width={600}
-											height={400}
-											className="rounded-md"
-										/>
-									</div>
-								)}
+								{Array.isArray(post.body) && <PortableText value={post.body} />}
 							</CardContent>
 						</Card>
 					))}
