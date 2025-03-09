@@ -46,8 +46,18 @@ export const makeStrapiClient = () => {
 	});
 };
 
-export const getArticles = async () => {
+export const getArticle = async ({
+	documentId,
+}: Pick<Article, "documentId">) => {
 	const client = makeStrapiClient();
-	const response = await client.get("/articles?populate=*");
+	const response = await client.get(`/articles/${documentId}?sort=order`);
+	return response.data.data as Article;
+};
+
+export const getArticles = async (isHomePage = false) => {
+	const client = makeStrapiClient();
+	const response = await client.get(
+		`/articles?sort=order&filters[isHomePage][$eq]=${isHomePage}`,
+	);
 	return response.data.data as Articles;
 };

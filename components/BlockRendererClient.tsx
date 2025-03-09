@@ -36,6 +36,16 @@ export default function BlockRendererClient({
 						{children}
 					</a>
 				),
+				paragraph: ({ children }) => {
+					if (!children) return null;
+
+					// hr hack... Why!!!!!!
+					if (Array.isArray(children) && children[0].props.text === "---") {
+						return <hr />;
+					}
+
+					return <p>{children}</p>;
+				},
 			}}
 		/>
 	);

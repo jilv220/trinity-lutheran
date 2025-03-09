@@ -1,9 +1,7 @@
 import BlockRendererClient from "@/components/BlockRendererClient";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type Articles, getArticles, getStrapiUrl } from "@/lib/strapi-api";
 import Image from "next/image";
-import { WORSHIP_PASTORS_INFO } from "../config";
 
 // This makes the page dynamic so it can fetch data on each request
 export const revalidate = 60;
@@ -11,9 +9,9 @@ export const revalidate = 60;
 export default async function Home() {
 	let articles: Articles = [];
 	try {
-		articles = await getArticles();
+		articles = await getArticles(true);
 	} catch (error) {
-		console.error("Failed to fetch home sections:", error);
+		console.error("Failed to fetch homepage articles:", error);
 	}
 
 	return (
