@@ -2,7 +2,7 @@ import BlockRendererClient from "@/components/BlockRendererClient";
 import { type Article, getArticle } from "@/lib/strapi-api";
 import type { Metadata } from "next";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
 	title: "Our Beliefs | Trinity Lutheran Church - Richmond, B.C.",

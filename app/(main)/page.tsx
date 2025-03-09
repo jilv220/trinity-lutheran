@@ -3,8 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type Articles, getArticles, getStrapiUrl } from "@/lib/strapi-api";
 import Image from "next/image";
 
-// This makes the page dynamic so it can fetch data on each request
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
 	let articles: Articles = [];
