@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { client } from "@/lib/sanity";
+import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
 import { PortableText, type SanityDocument } from "next-sanity";
 import Image from "next/image";
@@ -12,7 +12,11 @@ export default async function Home() {
 	]|order(publishedAt desc)[0...12]{_id, title, body, publishedAt}`;
 	const options = { next: { revalidate: 30 } };
 
-	const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+	const posts = await makeClient().fetch<SanityDocument[]>(
+		POSTS_QUERY,
+		{},
+		options,
+	);
 
 	return (
 		<div className="flex flex-col items-center justify-center">

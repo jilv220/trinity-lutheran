@@ -1,5 +1,4 @@
-import BlockRendererClient from "@/components/BlockRendererClient";
-import { client } from "@/lib/sanity";
+import { makeClient } from "@/lib/sanity";
 import type { Metadata } from "next";
 import { PortableText, type SanityDocument } from "next-sanity";
 
@@ -17,7 +16,11 @@ export default async function OurBeliefs() {
 	][0]{_id, title, body, publishedAt}`;
 	const options = { next: { revalidate: 30 } };
 
-	const post = await client.fetch<SanityDocument>(POST_QUERY, {}, options);
+	const post = await makeClient().fetch<SanityDocument>(
+		POST_QUERY,
+		{},
+		options,
+	);
 
 	return (
 		<div className="my-8 mx-4">
