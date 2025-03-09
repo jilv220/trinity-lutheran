@@ -1,14 +1,9 @@
 import BlockRendererClient from "@/components/BlockRendererClient";
 import { client } from "@/lib/sanity";
 import type { Metadata } from "next";
-import { PortableText, SanityDocument } from "next-sanity";
+import { PortableText, type SanityDocument } from "next-sanity";
 
 export const dynamic = "force-dynamic";
-
-const POST_QUERY = `*[
-  _type == "post" && slug.current == "our-beliefs"
-][0]{_id, title, body, publishedAt}`;
-const options = { next: { revalidate: 30 } };
 
 export const metadata: Metadata = {
 	title: "Our Beliefs | Trinity Lutheran Church - Richmond, B.C.",
@@ -17,6 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default async function OurBeliefs() {
+	const POST_QUERY = `*[
+  _type == "post" && slug.current == "our-beliefs"
+	][0]{_id, title, body, publishedAt}`;
+	const options = { next: { revalidate: 30 } };
+
 	const post = await client.fetch<SanityDocument>(POST_QUERY, {}, options);
 
 	return (

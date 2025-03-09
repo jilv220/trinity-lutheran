@@ -1,17 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { client } from "@/lib/sanity";
 import { nanoid } from "nanoid";
-import { PortableText, SanityDocument } from "next-sanity";
+import { PortableText, type SanityDocument } from "next-sanity";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
-const POSTS_QUERY = `*[
-  _type == "post" && isHomePage == true
-]|order(publishedAt desc)[0...12]{_id, title, body, publishedAt}`;
-const options = { next: { revalidate: 30 } };
+export default async function Home() {
+	const POSTS_QUERY = `*[
+		_type == "post" && isHomePage == true
+	]|order(publishedAt desc)[0...12]{_id, title, body, publishedAt}`;
+	const options = { next: { revalidate: 30 } };
 
-export default async function Home() {	
 	const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
 
 	return (
