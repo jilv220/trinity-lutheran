@@ -11,18 +11,17 @@ const components: Partial<PortableTextReactComponents> = {
 			const { slug = {} } = value;
 			const href = `/${slug.current}`;
 
-			return <Link href={href}>{children}</Link>;
+			return (
+				<CustomLink href={href} variant={"prose"}>
+					{children}
+				</CustomLink>
+			);
 		},
 		link: ({ value, children }) => {
 			const { href } = value;
 
 			return (
-				<CustomLink
-					href={href}
-					target="_blank"
-					rel="noreferrer noopener"
-					variant={"prose"}
-				>
+				<CustomLink href={href} variant={"prose"} external>
 					{children}
 				</CustomLink>
 			);

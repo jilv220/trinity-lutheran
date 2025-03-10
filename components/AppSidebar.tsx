@@ -53,12 +53,6 @@ const navItems: NavItem[] = [
 		icon: <Globe className="text-primary" />,
 	},
 	{
-		label: "Trinity's Little Children Centre",
-		href: "/trinitys-little-children-centre",
-		external: false,
-		icon: <Users className="text-primary" />,
-	},
-	{
 		label: "Bible Studies",
 		href: "/bible-studies",
 		external: false,

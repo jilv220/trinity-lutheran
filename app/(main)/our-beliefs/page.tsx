@@ -14,37 +14,25 @@ const resourceLinks = [
 	{
 		title: "What Lutherans Believe",
 		description: "A brief summary of our beliefs.",
-		href: "/resources/lutheran-beliefs",
-	},
-	{
-		title: "What Lutherans Believe with Short Explanation",
-		description:
-			'An overview of what we believe about "The Bible", about "God", about "Ourselves and Sin", about "Being Saved", about "Faith", about "Grace", about "Good Works", about "Life After Death"',
-		href: "/resources/lutheran-beliefs-explained",
+		href: "https://www.lutheranchurchcanada.ca/who-we-are/what-we-believe/",
 	},
 	{
 		title: "15 Key Elements of our Christian Faith",
 		description:
 			"A quick summary of the teachings of our congregation in 15 short statements.",
-		href: "/resources/key-elements",
-	},
-	{
-		title: "Lutheran Teachings About Various Topics",
-		description:
-			"Various Social Issues, God's Law and His Love, Sacraments of Holy Communion and Baptism, Confession and Forgiveness, etc.",
-		href: "/resources/lutheran-teachings",
+		href: "/posts/15-key-elements-of-our-christian-faith",
 	},
 	{
 		title: "What About?...",
 		description:
 			"27 pamphlets on various topics such as Angels, Death and Dying, Creation and Evolution, Abortion, Homosexuality, The Bible, The Ten Commandments, The Apostles' Creed, The Lord's Prayer, Ordination of Women, Living Together without Marriage, etc. (Go to bottom of linked page to access pamphlets.)",
-		href: "/resources/what-about",
+		href: "https://resources.lcms.org/reading-study/what-about-pamphlets/",
 	},
 	{
 		title: "The Christian's Role in God's Plan – VIDEO",
 		description:
 			"Six part VIDEO series covering various aspects of what we believe about Creation, God's Will, God's Law, Our Purpose in God's Plan, The Fulfillment of God's Plan at the Last Day when Christ returns and restores creation to the way it was supposed to be, including our fulfillment when we become what God intended us to be: fully human — perfect, free from sin, sickness, death and corruption — taking care of God's creation and fulfilling God's purposes. Each part of the video is 10 to 12 minutes long, entitled \"Who Am I? What Am I Doing Here?\"",
-		href: "/resources/gods-plan-videos",
+		href: "https://www.lhm.org/studies/studyvideofull.asp?ID=10279",
 	},
 ];
 
@@ -138,6 +126,7 @@ export default function OurBeliefs() {
 									href={link.href}
 									variant={"prose"}
 									className="font-medium text-base flex items-center"
+									external={link.href[0] !== "/"}
 								>
 									{link.title}
 								</CustomLink>
@@ -147,6 +136,8 @@ export default function OurBeliefs() {
 							</li>
 						))}
 					</ul>
+
+					<Separator className="my-8" />
 
 					<p className="mt-8 text-sm text-muted-foreground italic">
 						If you have trouble accessing any resources, please{" "}
