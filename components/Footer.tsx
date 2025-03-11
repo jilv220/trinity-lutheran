@@ -102,14 +102,6 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									href="/trinitys-little-children-centre"
-									className="hover:text-primary transition"
-								>
-									Trinity's Little Children Centre
-								</Link>
-							</li>
-							<li>
-								<Link
 									href="/contact-us"
 									className="hover:text-primary transition"
 								>
@@ -147,7 +139,7 @@ export default function Footer() {
 								rel="noopener noreferrer"
 							>
 								<Image
-									src="/lcc-logo.jpg"
+									src="/images/lcc-logo.jpg"
 									alt="Lutheran Church of Canada Logo"
 									width={220}
 									height={52}

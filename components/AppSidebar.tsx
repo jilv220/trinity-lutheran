@@ -98,7 +98,7 @@ export default function AppSidebar() {
 							<SidebarMenuButton
 								asChild
 								isActive={pathname === item.href}
-								className={`transition-all duration-200 ${
+								className={`transition-all duration-200 text-sm text-[0.925rem] ${
 									pathname === item.href
 										? "bg-primary/10 font-medium"
 										: "hover:bg-primary/5"
