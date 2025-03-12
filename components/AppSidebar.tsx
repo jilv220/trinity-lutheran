@@ -1,16 +1,20 @@
 "use client";
 
 import {
+	Banknote,
 	Book,
+	CalendarDays,
 	ExternalLink,
 	FileText,
 	Globe,
+	Headphones,
 	Home,
 	Library,
 	Link2,
 	Mail,
 	Users,
 } from "lucide-react";
+import { nanoid } from "nanoid";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,6 +22,7 @@ import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
+	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
@@ -70,17 +75,27 @@ const navItems: NavItem[] = [
 		external: false,
 		icon: <Link2 className="text-primary" />,
 	},
+];
+
+// New resource items section
+const resourceItems: NavItem[] = [
 	{
-		label: "Contact Us",
-		href: "/contact-us",
-		external: false,
-		icon: <Mail className="text-primary" />,
+		label: "Sermons at Trinity",
+		href: "/tlcsermons275.pdf",
+		external: true,
+		icon: <Headphones className="text-primary" />,
 	},
 	{
-		label: "Volunteer Resources",
-		href: "/volunteer-resources",
+		label: "Monthly Calendar",
+		href: "/tlcmonthlycalendars.pdf",
+		external: true,
+		icon: <CalendarDays className="text-primary" />,
+	},
+	{
+		label: "Donations",
+		href: "/blog/giving-to-trinitys-ministry",
 		external: false,
-		icon: <Users className="text-primary" />,
+		icon: <Banknote className="text-primary" />,
 	},
 ];
 
@@ -92,9 +107,57 @@ export default function AppSidebar() {
 			<SidebarHeader />
 
 			<SidebarContent className="px-2">
+				{/* Main Navigation Items */}
 				<SidebarMenu>
 					{navItems.map((item) => (
-						<SidebarMenuItem key={item.label}>
+						<SidebarMenuItem key={nanoid()}>
+							<SidebarMenuButton
+								asChild
+								isActive={pathname === item.href}
+								className={`transition-all duration-200 text-sm text-[0.925rem] ${
+									pathname === item.href
+										? "bg-primary/10 font-medium"
+										: "hover:bg-primary/5"
+								}`}
+							>
+								<Link
+									href={item.href}
+									target={item.external ? "_blank" : undefined}
+									rel={item.external ? "noopener noreferrer" : undefined}
+									className="flex items-center gap-3"
+									aria-label={`Navigate to ${item.label}${item.external ? " (opens in new tab)" : ""}`}
+								>
+									{/* Icon on the left */}
+									{item.icon}
+
+									{/* Navigation label */}
+									<span>{item.label}</span>
+
+									{/* External link indicator */}
+									{item.external && (
+										<ExternalLink
+											className="ml-auto h-3 w-3 text-muted-foreground"
+											aria-hidden="true"
+										/>
+									)}
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					))}
+				</SidebarMenu>
+
+				{/* Separator between main navigation and resources section */}
+				<SidebarSeparator className="my-2" />
+
+				{/* Resources Section Title */}
+				<SidebarGroupLabel className="px-3 text-muted-foreground">
+					Resources
+				</SidebarGroupLabel>
+
+				{/* Resources Items */}
+				<SidebarMenu>
+					{resourceItems.map((item) => (
+						<SidebarMenuItem key={nanoid()}>
 							<SidebarMenuButton
 								asChild
 								isActive={pathname === item.href}

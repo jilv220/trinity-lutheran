@@ -8,11 +8,13 @@ import {
 	Clock,
 	ExternalLink,
 	Info,
+	Mail,
 	Users,
 	Video,
 } from "lucide-react";
 import { nanoid } from "nanoid";
 import Link from "next/link";
+import { CustomLink } from "./CustomLink";
 
 // Define types for Bible classes and staff members
 type BibleClassType = "IN-PERSON" | "ONLINE (ZOOM)";
@@ -192,7 +194,7 @@ const BibleClassesCard = () => {
 					<p>Everyone Welcome!</p>
 					<Link
 						href="/bible-studies"
-						className="text-[#4384b0] font-bold hover:text-primary hover:underline flex items-center"
+						className="text-[#4384b0] hover:text-primary hover:underline flex items-center"
 						aria-label="More information about Bible classes"
 					>
 						<span>more info</span>
@@ -279,6 +281,56 @@ const StaffMembersCard = () => {
 	);
 };
 
+type EmailContact = {
+	name: string;
+	address: string;
+};
+
+const EmailContactsCard = () => {
+	const EMAIL_INFOS: Array<EmailContact> = [
+		{
+			name: "Church Office",
+			address: "tlcoffice@telus.net",
+		},
+		{
+			name: "Paster Steven Harold",
+			address: "tlc-pastor@telus.net",
+		},
+		{
+			name: "Paster Wayne Zhang",
+			address: "pastorzhang@gmail.com",
+		},
+		{
+			name: "Youth Director Adrianna",
+			address: "youthdirectortlcklc@gmail.com",
+		},
+	];
+
+	return (
+		<InfoCard
+			title="Email Contacts"
+			icon={<Mail className="h-5 w-5 mr-2" aria-hidden="true" />}
+			borderColor="border-t-[#4384b0]"
+			textColor="text-[#4384b0]"
+		>
+			<div className="text-sm space-y-3">
+				{EMAIL_INFOS.map((email) => (
+					<div key={nanoid()} className="pb-2">
+						<h3 className="font-medium text-foreground">{email.name}</h3>
+						<CustomLink
+							href={`mailto:${email.address}`}
+							variant={"prose"}
+							aria-label="Send email to Trinity Lutheran Church"
+						>
+							{email.address}
+						</CustomLink>
+					</div>
+				))}
+			</div>
+		</InfoCard>
+	);
+};
+
 interface InfoPanelProps {
 	className?: string;
 }
@@ -295,6 +347,7 @@ const InfoPanel = ({ className }: InfoPanelProps) => {
 			<WorshipTimesCard />
 			<BibleClassesCard />
 			<StaffMembersCard />
+			<EmailContactsCard />
 		</aside>
 	);
 };

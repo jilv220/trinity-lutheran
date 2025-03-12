@@ -1,6 +1,7 @@
 import { Facebook, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CustomLink } from "./CustomLink";
 
 export default function Footer() {
 	return (
@@ -101,12 +102,27 @@ export default function Footer() {
 								</Link>
 							</li>
 							<li>
-								<Link
-									href="/contact-us"
-									className="hover:text-primary transition"
-								>
-									Contact Us
+								<Link href="/links" className="hover:text-primary transition">
+									Links
 								</Link>
+							</li>
+							<li>
+								<CustomLink
+									href="https://www.youtube.com/playlist?list=PLQFDxLlySl-o-6-q5_MRtWJvHNXsZ5DSQ"
+									external
+									aria-label="Confession Chats"
+								>
+									Confession Chats
+								</CustomLink>
+							</li>
+							<li>
+								<CustomLink
+									href="https://www.canadianlutheran.ca/"
+									external
+									arai-label="CanadianLutheran.ca"
+								>
+									CanadianLutheran.ca
+								</CustomLink>
 							</li>
 						</ul>
 					</nav>

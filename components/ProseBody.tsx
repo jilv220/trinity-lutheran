@@ -2,7 +2,6 @@ import {
 	PortableText,
 	type PortableTextReactComponents,
 } from "@portabletext/react";
-import Link from "next/link";
 import { CustomLink } from "./CustomLink";
 
 const components: Partial<PortableTextReactComponents> = {
