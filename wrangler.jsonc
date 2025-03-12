@@ -23,13 +23,25 @@
 	 */
 	"placement": {
 		"mode": "smart"
-	}
+	},
 	/**
 	 * Bindings
 	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
 	 * databases, object storage, AI inference, real-time communication and more.
 	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
 	 */
+	"kv_namespaces": [
+		{
+			"binding": "trinity_lutheran_kv",
+			"id": "38c668f3bc5144068866393de9212212"
+		}
+	],
+	"services": [
+		{
+			"binding": "NEXT_CACHE_REVALIDATION_WORKER",
+			"service": "trinity-lutheran"
+		}
+	],
 	/**
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
