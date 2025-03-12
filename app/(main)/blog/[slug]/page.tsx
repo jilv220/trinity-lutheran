@@ -8,16 +8,17 @@ import { notFound } from "next/navigation";
 
 import Image from "next/image";
 
+type tParams = {
+	params: Promise<{ slug: string }>;
+};
+
 // Allow dynamic data fetching
 export const dynamic = "force-dynamic";
 
 // Generate metadata for the page
-export async function generateMetadata({
-	params,
-}: {
-	params: { slug: string };
-}): Promise<Metadata> {
-	const post = await fetchPost(params.slug);
+export async function generateMetadata({ params }: tParams): Promise<Metadata> {
+	const { slug } = await params;
+	const post = await fetchPost(slug);
 
 	if (!post) {
 		return {
@@ -51,11 +52,7 @@ async function fetchPost(slug: string) {
 }
 
 // Component for displaying a blog post
-export default async function BlogPost({
-	params,
-}: {
-	params: Promise<{ slug: string }>;
-}) {
+export default async function BlogPost({ params }: tParams) {
 	const { slug } = await params;
 	const post = await fetchPost(slug);
 
