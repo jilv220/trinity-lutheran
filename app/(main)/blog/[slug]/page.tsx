@@ -5,14 +5,16 @@ import type { Metadata } from "next";
 import type { SanityDocument } from "next-sanity";
 import { notFound } from "next/navigation";
 
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 import Image from "next/image";
+
+export const dynamic = "force-dynamic";
 
 type tParams = {
 	params: Promise<{ slug: string }>;
 };
 
-const ProseBody = dynamic(() =>
+const ProseBody = dynamicImport(() =>
 	import("@/components/ProseBody").then((mod) => mod.ProseBody),
 );
 
