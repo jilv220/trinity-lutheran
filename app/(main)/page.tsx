@@ -1,12 +1,14 @@
 import { CustomLink } from "@/components/CustomLink";
-import { ProseBody } from "@/components/ProseBody";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
 import { PortableText, type SanityDocument } from "next-sanity";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
+const ProseBody = dynamic(() =>
+	import("@/components/ProseBody").then((mod) => mod.ProseBody),
+);
 
 export default async function Home() {
 	const POSTS_QUERY = `*[
@@ -48,8 +50,10 @@ export default async function Home() {
 									</span>
 								</CustomLink>
 							</CardHeader>
-							<CardContent className="prose">
-								{Array.isArray(post.body) && ProseBody(post.body)}
+							<CardContent>
+								<div className="prose line-clamp-6 max-w-none">
+									<ProseBody blocks={post.body} />
+								</div>
 							</CardContent>
 						</Card>
 					))}

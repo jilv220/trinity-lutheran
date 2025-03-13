@@ -1,19 +1,20 @@
 import { CustomLink } from "@/components/CustomLink";
-import { ProseBody } from "@/components/ProseBody";
 import { makeClient } from "@/lib/sanity";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import type { SanityDocument } from "next-sanity";
 import { notFound } from "next/navigation";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 
 type tParams = {
 	params: Promise<{ slug: string }>;
 };
 
-// Allow dynamic data fetching
-export const dynamic = "force-dynamic";
+const ProseBody = dynamic(() =>
+	import("@/components/ProseBody").then((mod) => mod.ProseBody),
+);
 
 // Generate metadata for the page
 export async function generateMetadata({ params }: tParams): Promise<Metadata> {
@@ -131,7 +132,7 @@ export default async function BlogPost({ params }: tParams) {
 
 				{/* Main content */}
 				<div className="prose prose-sm sm:prose lg:prose-lg max-w-none">
-					{Array.isArray(post.body) && ProseBody(post.body)}
+					<ProseBody blocks={post.body} />
 				</div>
 			</article>
 		</div>

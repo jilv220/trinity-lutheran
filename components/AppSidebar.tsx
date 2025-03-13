@@ -15,9 +15,9 @@ import {
 	Users,
 } from "lucide-react";
 import { nanoid } from "nanoid";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { ComponentProps } from "react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -99,11 +99,16 @@ const resourceItems: NavItem[] = [
 	},
 ];
 
-export default function AppSidebar() {
+export default function AppSidebar({
+	...props
+}: ComponentProps<typeof Sidebar>) {
 	const pathname = usePathname();
 
 	return (
-		<Sidebar className="top-[--header-height] !h-[calc(100svh-var(--header-height))]">
+		<Sidebar
+			className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
+			{...props}
+		>
 			<SidebarHeader />
 
 			<SidebarContent className="px-2">

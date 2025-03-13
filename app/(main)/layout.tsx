@@ -1,3 +1,4 @@
+// app/(main)/layout.tsx
 import AppSidebar from "@/components/AppSidebar";
 import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -19,7 +20,7 @@ export default function MainLayout({
 				<Header>
 					<SidebarTrigger className="ml-2 mr-1 w-8 h-8" />
 				</Header>
-				<div className="flex flex-1">
+				<div className="flex flex-1 pt-[--header-height]">
 					<AppSidebar />
 					<SidebarInset>
 						<div className="relative flex flex-col lg:flex-row min-h-screen w-full max-w-7xl mx-auto gap-4">
