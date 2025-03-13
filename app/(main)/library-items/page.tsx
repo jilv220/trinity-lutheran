@@ -8,6 +8,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { makeClient } from "@/lib/sanity";
+import { createQueryString } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import type { SanityDocument } from "next-sanity";
 
@@ -19,7 +20,6 @@ export default async function LibraryItemsPage() {
   {
     _id, 
     title,
-    "slug": slug.current,
     "bookCount": count(*[_type=='libraryItem' && references(^._id)])
   }`;
 
@@ -63,15 +63,15 @@ export default async function LibraryItemsPage() {
 				<TableHeader>
 					<TableRow className="bg-secondary/20">
 						<TableHead className="w-[70%]">Category</TableHead>
-						<TableHead className="text-right">Number of Books</TableHead>
+						<TableHead className="text-right"># Books</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					{categories.map((category) => (
-						<TableRow key={nanoid()}>
-							<TableCell className="font-medium">
+						<TableRow key={nanoid()} className="[&>td]:p-3">
+							<TableCell className="font-medium ">
 								<CustomLink
-									href={`/library/category/${category._id}`}
+									href={`/library-items/${category._id}?${createQueryString("parent", category.title)}`}
 									variant="prose"
 									aria-label={`Browse ${category.title} category`}
 								>

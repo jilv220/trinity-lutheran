@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import type { SanityDocument } from "next-sanity";
 import { notFound } from "next/navigation";
 
+import BackLink from "@/components/BackLink";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
@@ -77,15 +78,7 @@ export default async function BlogPost({ params }: tParams) {
 		<div className="my-8 mx-4 max-w-4xl">
 			{/* Back to Home link */}
 			<div className="mb-6">
-				<CustomLink
-					href="/"
-					variant="prose"
-					className="inline-flex items-center"
-					aria-label="Back to homepage"
-				>
-					<ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
-					Back to Home
-				</CustomLink>
+				<BackLink href="/" label="Home" />
 			</div>
 
 			<article className="w-full">

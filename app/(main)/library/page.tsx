@@ -124,7 +124,7 @@ export default function LibraryPage() {
 			{/* Library access button */}
 			<div className="flex justify-center my-12">
 				<CustomLink
-					href="/library/library-items"
+					href="/library-items"
 					className="bg-[#33cccc] hover:bg-[#33cccc]/80 text-[#800000] hover:opacity-90 font-bold py-4 px-8 rounded-md text-xl shadow-md transition-all"
 					aria-label="Access the online Trinity Library catalog"
 				>

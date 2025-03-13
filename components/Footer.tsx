@@ -154,12 +154,14 @@ export default function Footer() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<Image
-									src="/images/lcc-logo.jpg"
-									alt="Lutheran Church of Canada Logo"
-									width={220}
-									height={52}
-								/>
+								<div className="relative w-[220px] h-[52px]">
+									<Image
+										src="/images/lcc-logo.jpg"
+										alt="Lutheran Church of Canada Logo"
+										fill
+										sizes="220px"
+									/>
+								</div>
 							</a>
 						</div>
 					</div>

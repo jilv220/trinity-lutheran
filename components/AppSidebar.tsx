@@ -12,14 +12,11 @@ import {
 	Home,
 	Library,
 	Link2,
-	Mail,
-	Search,
-	Users,
 } from "lucide-react";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useEffect } from "react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -30,6 +27,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarSeparator,
+	useSidebar,
 } from "./ui/sidebar";
 
 type NavItem = {
@@ -83,7 +81,7 @@ const libraryItems: NavItem[] = [
 	},
 	{
 		label: "Library Items",
-		href: "/library/library-items",
+		href: "/library-items",
 		external: false,
 		icon: <Book className="text-primary" />,
 	},
@@ -115,6 +113,12 @@ export default function AppSidebar({
 	...props
 }: ComponentProps<typeof Sidebar>) {
 	const pathname = usePathname();
+	const { setOpenMobile } = useSidebar();
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		setOpenMobile(false);
+	}, [pathname]);
 
 	// Helper function to render menu items
 	const renderMenuItems = (items: NavItem[]) => {
