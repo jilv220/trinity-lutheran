@@ -8,6 +8,7 @@ import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const ProseBody = dynamicImport(() =>
 	import("@/components/ProseBody").then((mod) => mod.ProseBody),
@@ -18,7 +19,7 @@ export default async function Home() {
 		_type == "post" && isHomePage == true
 	]|order(publishedAt desc){
 	_id, title, slug, body}`;
-	const options = { next: { revalidate: 30 } };
+	const options = { next: { revalidate } };
 
 	const posts = await makeClient().fetch<SanityDocument[]>(
 		POSTS_QUERY,

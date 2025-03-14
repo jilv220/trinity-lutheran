@@ -9,7 +9,8 @@ import BackLink from "@/components/BackLink";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+export const dynamicParams = true;
 
 type tParams = {
 	params: Promise<{ slug: string }>;
@@ -51,7 +52,7 @@ async function fetchPost(slug: string) {
     "categories": categories[]->title
   }`;
 
-	const options = { next: { revalidate: 30 } };
+	const options = { next: { revalidate } };
 	return makeClient().fetch<SanityDocument>(POST_QUERY, { slug }, options);
 }
 
