@@ -12,7 +12,7 @@ import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
 import type { SanityDocument } from "next-sanity";
 
-export const revalidate = 30 * 60;
+export const revalidate = 1800;
 export const dynamicParams = true;
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;

@@ -12,7 +12,7 @@ import { createQueryString } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import type { SanityDocument } from "next-sanity";
 
-export const revalidate = 30 * 60;
+export const revalidate = 1800;
 
 export default async function LibraryItemsPage() {
 	const client = await makeClient({ async: true });

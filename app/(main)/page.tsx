@@ -7,7 +7,7 @@ import { PortableText, type SanityDocument } from "next-sanity";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
-export const revalidate = 30 * 60;
+export const revalidate = 1800;
 
 const ProseBody = dynamicImport(() =>
 	import("@/components/ProseBody").then((mod) => mod.ProseBody),

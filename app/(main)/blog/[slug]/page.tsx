@@ -9,7 +9,7 @@ import BackLink from "@/components/BackLink";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
-export const revalidate = 30 * 60;
+export const revalidate = 1800;
 export const dynamicParams = true;
 
 type tParams = {
