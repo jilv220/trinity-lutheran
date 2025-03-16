@@ -12,7 +12,7 @@ import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
 import type { SanityDocument } from "next-sanity";
 
-export const revalidate = 300;
+export const revalidate = 30 * 60;
 export const dynamicParams = true;
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -23,8 +23,6 @@ type tParams = {
 	searchParams: SearchParams;
 };
 
-export const dynamic = "force-dynamic";
-
 export default async function SubcategoriesPage({
 	params,
 	searchParams,
@@ -32,7 +30,7 @@ export default async function SubcategoriesPage({
 	const { categoryId } = await params;
 	const { parent } = await searchParams;
 
-	const client = makeClient();
+	const client = await makeClient();
 	const CATEGORIES_QUERY = `*[_type=="librarySubcategory" 
 		&& references("${categoryId}")
 	] 
@@ -42,7 +40,7 @@ export default async function SubcategoriesPage({
     title,
     "bookCount": count(*[_type=='libraryItem' && references(^._id)])
   }`;
-	const options = { next: { revalidate: 30 } };
+	const options = { next: { revalidate } };
 
 	// Fetch categories properly
 	const subcategories = await client.fetch<SanityDocument[]>(

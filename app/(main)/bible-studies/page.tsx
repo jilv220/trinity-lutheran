@@ -196,10 +196,6 @@ export default function BibleStudies() {
 						<Card key={nanoid()} className="border-l-2 border-l-[#568eb6]">
 							<CardHeader className="pb-2">
 								<CardTitle className="text-xl text-[#4384b0] flex items-center">
-									<BookOpen
-										className="h-5 w-5 mr-2 text-primary/70"
-										aria-hidden="true"
-									/>
 									{study.title}
 								</CardTitle>
 								<div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">

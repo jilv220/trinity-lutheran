@@ -12,10 +12,10 @@ import { createQueryString } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import type { SanityDocument } from "next-sanity";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30 * 60;
 
 export default async function LibraryItemsPage() {
-	const client = makeClient();
+	const client = await makeClient({ async: true });
 	const CATEGORIES_QUERY = `*[_type == "libraryCategory"] | order(title asc)
   {
     _id, 
@@ -23,7 +23,7 @@ export default async function LibraryItemsPage() {
     "bookCount": count(*[_type=='libraryItem' && references(^._id)])
   }`;
 
-	const options = { next: { revalidate: 30 } };
+	const options = { next: { revalidate } };
 
 	// Fetch categories properly
 	const categories = await client.fetch<SanityDocument[]>(

@@ -7,8 +7,7 @@ import { PortableText, type SanityDocument } from "next-sanity";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 300;
+export const revalidate = 30 * 60;
 
 const ProseBody = dynamicImport(() =>
 	import("@/components/ProseBody").then((mod) => mod.ProseBody),
@@ -21,11 +20,8 @@ export default async function Home() {
 	_id, title, slug, body}`;
 	const options = { next: { revalidate } };
 
-	const posts = await makeClient().fetch<SanityDocument[]>(
-		POSTS_QUERY,
-		{},
-		options,
-	);
+	const client = await makeClient({ async: true });
+	const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
 
 	return (
 		<div className="flex flex-col items-center justify-center">

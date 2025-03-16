@@ -290,11 +290,11 @@ const EmailContactsCard = () => {
 	const EMAIL_INFOS: Array<EmailContact> = [
 		{
 			name: "Church Office",
-			address: "tlcoffice@telus.net",
+			address: "tlcoffice@tlc-lcc.ca",
 		},
 		{
-			name: "Paster Steven Harold",
-			address: "tlc-pastor@telus.net",
+			name: "Paster Brian Falkenholt",
+			address: "pastorbrianfalkenholt@hotmail.ca",
 		},
 		{
 			name: "Paster Wayne Zhang",

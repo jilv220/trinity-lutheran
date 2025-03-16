@@ -9,7 +9,7 @@ import BackLink from "@/components/BackLink";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
-export const revalidate = 300;
+export const revalidate = 30 * 60;
 export const dynamicParams = true;
 
 type tParams = {
@@ -53,7 +53,8 @@ async function fetchPost(slug: string) {
   }`;
 
 	const options = { next: { revalidate } };
-	return makeClient().fetch<SanityDocument>(POST_QUERY, { slug }, options);
+	const client = await makeClient();
+	return client.fetch<SanityDocument>(POST_QUERY, { slug }, options);
 }
 
 // Component for displaying a blog post
