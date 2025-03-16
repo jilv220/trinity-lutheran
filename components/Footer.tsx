@@ -31,7 +31,7 @@ export default function Footer() {
 										aria-label="Open church location in Google Maps (opens in new tab)"
 									>
 										<p>7100 Granville Avenue</p>
-										<p>Richmond, BC V6Y 1P3</p>
+										<p>Richmond, BC V6Y 1N8</p>
 									</a>
 								</div>
 							</div>

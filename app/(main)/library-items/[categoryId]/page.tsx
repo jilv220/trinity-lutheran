@@ -11,6 +11,7 @@ import {
 import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
 import type { SanityDocument } from "next-sanity";
+import { notFound } from "next/navigation";
 
 export const revalidate = 1800;
 export const dynamicParams = true;
@@ -28,23 +29,32 @@ export default async function SubcategoriesPage({
 	searchParams,
 }: tParams) {
 	const { categoryId } = await params;
-	const { parent } = await searchParams;
-
 	const client = await makeClient();
-	const CATEGORIES_QUERY = `*[_type=="librarySubcategory" 
+
+	const CATEGORY_QUERY = `*[_type == "libraryCategory" && _id == "${categoryId}"][0]{
+    title,
+  }`;
+
+	const SUBCATEGORIES_QUERY = `*[_type=="librarySubcategory" 
 		&& references("${categoryId}")
 	] 
   | order(title asc)
   {
     _id, 
     title,
-    "bookCount": count(*[_type=='libraryItem' && references(^._id)])
+    "bookCount": count(*[_type=='libraryItem' && references(^._id)]),
   }`;
 	const options = { next: { revalidate } };
 
-	// Fetch categories properly
+	const category = await client.fetch<SanityDocument>(
+		CATEGORY_QUERY,
+		{},
+		options,
+	);
+	if (!category) notFound();
+
 	const subcategories = await client.fetch<SanityDocument[]>(
-		CATEGORIES_QUERY,
+		SUBCATEGORIES_QUERY,
 		{},
 		options,
 	);
@@ -53,11 +63,11 @@ export default async function SubcategoriesPage({
 	return (
 		<div className="my-8 mx-4 max-w-5xl">
 			<h1 className="pb-4 text-3xl text-[#4384b0] font-semibold leading-none tracking-tight">
-				Library Items
+				Library Items: {category.title}
 			</h1>
 
 			<div className="mt-6 mb-3">
-				<BackLink href="/library-items" label={parent as string} />
+				<BackLink href="/library-items" label={"Categories"} />
 			</div>
 
 			{/* Library Item Table */}
@@ -69,18 +79,20 @@ export default async function SubcategoriesPage({
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{subcategories.map((category) => (
+					{subcategories.map((subcategory) => (
 						<TableRow key={nanoid()} className="[&>td]:p-3">
 							<TableCell className="font-medium">
 								<CustomLink
-									href={`/library-items/${category._id}`}
+									href={`/library-items/${categoryId}/${subcategory._id}`}
 									variant="prose"
-									aria-label={`Browse ${category.title} category`}
+									aria-label={`Browse ${subcategory.title} category`}
 								>
-									{category.title}
+									{subcategory.title}
 								</CustomLink>
 							</TableCell>
-							<TableCell className="text-right">{category.bookCount}</TableCell>
+							<TableCell className="text-right">
+								{subcategory.bookCount}
+							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

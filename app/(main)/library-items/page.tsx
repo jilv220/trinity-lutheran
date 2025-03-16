@@ -14,7 +14,7 @@ import type { SanityDocument } from "next-sanity";
 
 export const revalidate = 1800;
 
-export default async function LibraryItemsPage() {
+export default async function LibraryCatalog() {
 	const client = await makeClient({ async: true });
 	const CATEGORIES_QUERY = `*[_type == "libraryCategory"] | order(title asc)
   {
@@ -71,7 +71,7 @@ export default async function LibraryItemsPage() {
 						<TableRow key={nanoid()} className="[&>td]:p-3">
 							<TableCell className="font-medium ">
 								<CustomLink
-									href={`/library-items/${category._id}?${createQueryString("parent", category.title)}`}
+									href={`/library-items/${category._id}`}
 									variant="prose"
 									aria-label={`Browse ${category.title} category`}
 								>

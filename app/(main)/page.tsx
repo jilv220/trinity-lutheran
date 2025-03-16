@@ -2,7 +2,7 @@ import { CustomLink } from "@/components/CustomLink";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { makeClient } from "@/lib/sanity";
 import { nanoid } from "nanoid";
-import { PortableText, type SanityDocument } from "next-sanity";
+import type { SanityDocument } from "next-sanity";
 
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
